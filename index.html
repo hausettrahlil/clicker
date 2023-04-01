@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Clicker Game</title>
+<style>
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="center">
+<h1>Clicker Game</h1>
+
+<p>Score: <span id="score">0</span></p>
+
+<button onclick="addScore()">Click me!</button>
+
+<p>Cost of machine: <span id="machineCost">100</span> points</p>
+
+<button id="machine" onclick="buyMachine()">Buy machine</button>
+
+<p id="machineUpgrade" style="display:none">Cost of machine upgrade: <span id="machineUpgradeCost">200</span> points</p>
+
+<button id="machineUpgradeButton" style="display:none" onclick="buyMachineUpgrade()">Buy machine upgrade</button>
+
+<p>Cost of hand: <span id="handCost">250</span> points</p>
+
+<button id="hand" onclick="buyHand()">Buy hand</button>
+
+<p id="handUpgrade" style="display:none">Cost of hand upgrade: <span id="handUpgradeCost">500</span> points</p>
+
+<button id="handUpgradeButton" style="display:none" onclick="buyHandUpgrade()">Buy hand upgrade</button>
+</div>
+
+<script>
+let score = 0;
+let machineCost = 100;
+let machineSpeed = 5;
+let handCost = 250;
+let handSpeed = 2;
+let machineUpgradeCost = 200;
+let machineUpgradeSpeed = 5;
+let handUpgradeCost = 500;
+let handUpgradeSpeed = 2;
+
+function addScore() {
+score++;
+document.getElementById("score").innerHTML = score;
+}
+
+function buyMachine() {
+if (score >= machineCost) {
+score -= machineCost;
+machineCost *= 2;
+setInterval(function() {
+score += machineSpeed;
+document.getElementById("score").innerHTML = score;
+}, 1000);
+document.getElementById("score").innerHTML = score;
+document.getElementById("machineCost").innerHTML = machineCost;
+document.getElementById("machineUpgrade").style.display = "block";
+document.getElementById("machineUpgradeButton").style.display = "block";
+}
+}
+
+function buyMachineUpgrade() {
+if (score >= machineUpgradeCost) {
+score -= machineUpgradeCost;
+machineUpgradeCost *= 2;
+machineSpeed += machineUpgradeSpeed;
+document.getElementById("score").innerHTML = score;
+document.getElementById("machineUpgradeCost").innerHTML = machineUpgradeCost;
+}
+}
+
+function buyHand() {
+if (score >= handCost) {
+score -= handCost;
+handCost *= 2;
+handSpeed *= 2;
+addScore = function() {
+score += handSpeed;
+document.getElementById("score").innerHTML = score;
+}
+document.getElementById("score").innerHTML = score;
+document.getElementById("handCost").innerHTML = handCost;
+document.getElementById("handUpgrade").style.display = "block";
+document.getElementById("handUpgradeButton").style.display = "block";
+}
+}
+
+function buyHandUpgrade() {
+if (score >= handUpgradeCost) {
+score -= handUpgradeCost;
+handUpgradeCost *= 2;
+handSpeed += handUpgradeSpeed;
+addScore = function() {
+score += handSpeed;
+document.getElementById("score").innerHTML = score;
+}
+document.getElementById("score").innerHTML = score;
+document.getElementById("handUpgradeCost").innerHTML = handUpgradeCost;
+}
+}
+</script>
+
+</body>
+</html>
